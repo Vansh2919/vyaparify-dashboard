@@ -1,0 +1,185 @@
+.products-toolbar {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.chip-group { display: flex; gap: 8px; }
+.chip {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px; font-weight: 600; color: var(--ink-soft);
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-xs);
+}
+.chip:hover { border-color: var(--ink-soft); }
+.chip--active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.product-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: box-shadow 0.2s var(--ease), border-color 0.2s ease, transform 0.2s var(--ease);
+  box-shadow: var(--shadow-xs);
+}
+.product-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.product-card__thumb-btn { display: block; width: 100%; border: none; padding: 0; background: none; cursor: pointer; }
+
+.product-card__body { padding: 14px 15px 16px; }
+.product-card__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.product-card__delete {
+  background: none; border: none; color: var(--muted); padding: 4px;
+  border-radius: 6px; transition: all 0.12s ease;
+}
+.product-card__delete:hover { color: var(--danger); background: var(--danger-tint); }
+
+.product-card__name {
+  display: block; width: 100%; text-align: left;
+  background: none; border: none; padding: 0;
+  font-size: 14.5px; font-weight: 600; color: var(--ink);
+  margin-bottom: 3px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  cursor: pointer;
+}
+.product-card__name:hover { color: var(--accent-deep); }
+.product-card__category { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+
+.product-card__foot { display: flex; align-items: center; justify-content: space-between; }
+.product-card__price { font-family: var(--font-display); font-weight: 600; font-size: 16px; letter-spacing: -0.02em; }
+.product-card__stock { font-size: 11.5px; color: var(--muted); }
+
+/* Modal */
+.modal-scrim {
+  position: fixed; inset: 0; background: rgba(18,20,28,0.5);
+  backdrop-filter: blur(4px);
+  display: grid; place-items: center; z-index: 100; padding: 20px;
+  animation: fadeIn 0.15s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal {
+  background: var(--surface); border-radius: var(--r-lg);
+  padding: 28px; max-width: 400px; width: 100%;
+  box-shadow: var(--shadow-lg);
+  animation: panelIn 0.2s var(--ease-out);
+}
+.modal h3 { font-size: 17px; margin-bottom: 8px; }
+.modal p { font-size: 13.5px; color: var(--muted); line-height: 1.5; margin-bottom: 22px; }
+.modal__actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+@media (max-width: 1100px) {
+  .product-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 760px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 460px) {
+  .product-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .products-toolbar { flex-direction: column; align-items: stretch; }
+  .products-toolbar .topbar__search { max-width: none !important; }
+}
+
+.product-card__thumb-btn { position: relative; }
+.product-card__offer {
+  position: absolute;
+  top: 10px; left: 10px;
+  z-index: 2;
+  background: linear-gradient(135deg, #FF5C3A 0%, #E04422 100%);
+  color: #fff;
+  font-size: 11px; font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 8px rgba(224, 68, 34, 0.35);
+}
+.product-card__price-wrap {
+  display: flex; align-items: baseline; gap: 6px;
+}
+.product-card__mrp {
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+/* Coupon popup (Myntra-style) */
+.coupon-popup {
+  position: relative;
+  background: linear-gradient(135deg, #FFF5F0 0%, #FFE8DE 40%, #FFF 100%);
+  border: 1px solid #FFD4C8;
+  border-radius: var(--r-lg);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.coupon-popup__close {
+  position: absolute;
+  top: 10px; right: 14px;
+  background: none; border: none;
+  font-size: 22px; color: var(--muted);
+  line-height: 1; cursor: pointer;
+}
+.coupon-popup__body {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+}
+.coupon-popup__label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--accent-deep); margin-bottom: 4px;
+}
+.coupon-popup__left h3 {
+  font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px;
+}
+.coupon-popup__left h3 span { color: var(--accent); }
+.coupon-popup__sub { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+.coupon-popup__code {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #fff; border: 1.5px dashed var(--accent);
+  border-radius: 10px; padding: 8px 12px;
+}
+.coupon-popup__code code {
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  letter-spacing: 0.04em; color: var(--ink);
+}
+.coupon-popup__code button {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+  color: #fff; border: none; border-radius: 6px;
+  padding: 5px 12px; font-size: 12px; font-weight: 700;
+  cursor: pointer;
+}
+.coupon-popup__right {
+  text-align: right;
+}
+.coupon-popup__badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #FF5C3A 0%, #E04422 100%);
+  color: #fff; font-size: 13px; font-weight: 800;
+  padding: 8px 14px; border-radius: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 14px rgba(224, 68, 34, 0.3);
+}
+.coupon-popup__right p { font-size: 12.5px; color: var(--muted); max-width: 180px; margin-left: auto; }
+
+@media (max-width: 640px) {
+  .coupon-popup__body { flex-direction: column; align-items: flex-start; }
+  .coupon-popup__right { text-align: left; }
+  .coupon-popup__right p { margin-left: 0; }
+}
